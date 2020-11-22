@@ -687,9 +687,11 @@ const App = () => (
                   {/*<TouchableOpacity style={[styles.button, styles.minus]}>*/}
                   {/*  <Text style={styles.buttonText}>-</Text>*/}
                   {/*</TouchableOpacity>*/}
-                  <Text style={[styles.button, styles.buttonText, styles.quantity]}>
-                    {quantity}
-                  </Text>
+                  {quantity > 0 && (
+                    <Text style={[styles.button, styles.buttonText, styles.quantity]}>
+                      {quantity - 1}
+                    </Text>
+                  )}
                   {/*<TouchableOpacity style={[styles.button, styles.plus]}>*/}
                   {/*  <Text style={styles.buttonText}>+</Text>*/}
                   {/*</TouchableOpacity>*/}
