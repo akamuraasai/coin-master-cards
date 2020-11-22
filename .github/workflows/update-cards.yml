@@ -1,0 +1,35 @@
+name: Update Cards
+
+on: workflow_dispatch
+
+jobs:
+  deploy-web:
+    name: Deploy new versio after cards retrival
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Installing packages
+        run: yarn install --frozen-lockfile
+
+      - name: Run retrival function
+        run: yarn getSets
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+          DEVICE_ID: ${{ secrets.DEVICE_ID }}
+          USER_FB_TOKEN: ${{ secrets.USER_FB_TOKEN }}
+
+      - name: Commit and Push
+        uses: github-actions-x/commit@v2.7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          push-branch: 'master'
+          commit-message: 'new cards'
+          force-add: 'true'
+          files: src/sets.json
+          name: Github Action
+          email: jonathan.willian.tod@gmail.com
