@@ -4,7 +4,7 @@ on: workflow_dispatch
 
 jobs:
   deploy-web:
-    name: Deploy new versio after cards retrival
+    name: Deploy new version after cards retrival
 
     runs-on: ubuntu-latest
 
