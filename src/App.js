@@ -5,7 +5,7 @@ import {
   StyleSheet,
   Platform,
   Dimensions,
-  TouchableOpacity,
+  // TouchableOpacity,
 } from 'react-native';
 import Star from './Star';
 import sets from './sets.json';
@@ -676,9 +676,9 @@ const App = () => (
             const quantity = checkCard(sets, id, cardId);
 
             return (
-              <View style={[styles.card, checkCardStyle(quantity, gold)]}>
+              <View style={[styles.card, checkCardStyle(quantity, gold)]} key={cardId}>
                 <View style={styles.stars}>
-                  {Array.from({ length: stars }).map((index) => (
+                  {Array.from({ length: stars }).map((_, index) => (
                     <Star key={index} />
                   ))}
                 </View>
