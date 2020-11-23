@@ -91,8 +91,12 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   quantity: {
+    paddingVertical: 2,
+    paddingHorizontal: 8,
+    borderRadius: 8,
     color: '#000000',
     backgroundColor: '#d0d0d0',
+    marginBottom: 6,
   },
 });
 
@@ -688,7 +692,7 @@ const App = () => (
                   {/*  <Text style={styles.buttonText}>-</Text>*/}
                   {/*</TouchableOpacity>*/}
                   {quantity > 0 && (
-                    <Text style={[styles.button, styles.buttonText, styles.quantity]}>
+                    <Text style={styles.quantity}>
                       {quantity - 1}
                     </Text>
                   )}
