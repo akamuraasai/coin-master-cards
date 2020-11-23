@@ -5,7 +5,7 @@ import {
   StyleSheet,
   Platform,
   Dimensions,
-  // TouchableOpacity,
+  Linking,
 } from 'react-native';
 import Star from './Star';
 import sets from './sets.json';
@@ -13,6 +13,46 @@ import sets from './sets.json';
 const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
+  page: {
+    backgroundColor: '#c5f5e7',
+  },
+  header: {
+    backgroundColor: '#0c0c0c',
+    height: 50,
+    borderBottomWidth: 1,
+    borderBottomColor: '#c0c0c0',
+    borderBottomLeftRadius: 4,
+    borderBottomRightRadius: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#ffffff',
+  },
+  footer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 12,
+  },
+  footerText: {
+    fontSize: 12,
+    fontWeight: 'bold',
+  },
+  footerLink: {
+    color: 'blue',
+    cursor: 'hand',
+  },
   wrapper: {
     flex: 1,
     flexWrap: 'wrap',
@@ -27,7 +67,6 @@ const styles = StyleSheet.create({
     borderColor: '#c0c0c0',
     borderRadius: 12,
     padding: 4,
-    // backgroundColor: '#f2c18f',
     backgroundColor: '#eecdba',
     marginBottom: 12,
     marginRight: (width >= 394) ? 12 : 0,
@@ -671,42 +710,49 @@ const checkCardStyle = (quantity, gold) => {
 };
 
 const App = () => (
-  <View style={styles.wrapper}>
-    {groups.map(({ id, title, cards }) => (
-      <View style={styles.group} key={id}>
-        <Text style={styles.groupTitle}>{title}</Text>
-        <View style={styles.cards}>
-          {cards.map(({ id: cardId, stars, cardTitle, gold }) => {
-            const quantity = checkCard(sets, id, cardId);
+  <View style={styles.page}>
+    <View style={styles.header}>
+      <Text style={styles.headerTitle}>Cards - Coin Master</Text>
+    </View>
+    <View style={styles.wrapper}>
+      {groups.map(({ id, title, cards }) => (
+        <View style={styles.group} key={id}>
+          <Text style={styles.groupTitle}>{title}</Text>
+          <View style={styles.cards}>
+            {cards.map(({ id: cardId, stars, cardTitle, gold }) => {
+              const quantity = checkCard(sets, id, cardId);
 
-            return (
-              <View style={[styles.card, checkCardStyle(quantity, gold)]} key={cardId}>
-                <View style={styles.stars}>
-                  {Array.from({ length: stars }).map((_, index) => (
-                    <Star key={index} />
-                  ))}
+              return (
+                <View style={[styles.card, checkCardStyle(quantity, gold)]} key={cardId}>
+                  <View style={styles.stars}>
+                    {Array.from({ length: stars }).map((_, index) => (
+                      <Star key={index} />
+                    ))}
+                  </View>
+                  <Text style={styles.cardTitle}>{cardTitle}</Text>
+                  <View style={styles.buttons}>
+                    {quantity > 0 && (
+                      <Text style={styles.quantity}>
+                        {quantity - 1}
+                      </Text>
+                    )}
+                  </View>
                 </View>
-                <Text style={styles.cardTitle}>{cardTitle}</Text>
-                <View style={styles.buttons}>
-                  {/*<TouchableOpacity style={[styles.button, styles.minus]}>*/}
-                  {/*  <Text style={styles.buttonText}>-</Text>*/}
-                  {/*</TouchableOpacity>*/}
-                  {quantity > 0 && (
-                    <Text style={styles.quantity}>
-                      {quantity - 1}
-                    </Text>
-                  )}
-                  {/*<TouchableOpacity style={[styles.button, styles.plus]}>*/}
-                  {/*  <Text style={styles.buttonText}>+</Text>*/}
-                  {/*</TouchableOpacity>*/}
-                </View>
-              </View>
-            )
-          })}
+              )
+            })}
+          </View>
         </View>
-      </View>
-    ))}
-
+      ))}
+    </View>
+    <View style={styles.footer}>
+      <Text style={styles.footerText}>Made with ❤️ by </Text>
+      <Text
+        style={[styles.footerText, styles.footerLink]}
+        onPress={() => Linking.openURL('https://github.com/akamuraasai')}
+      >
+        Akamura Asai
+      </Text>
+    </View>
   </View>
 );
 

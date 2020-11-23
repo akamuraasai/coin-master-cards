@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Cartas - Coin Master",
+  "name": "Lista de Cartas Para Trocas em Coin Master",
   "icons": [
     {
       "src": "favicon.ico",
