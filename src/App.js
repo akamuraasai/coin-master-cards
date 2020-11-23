@@ -745,7 +745,7 @@ const App = () => (
       ))}
     </View>
     <View style={styles.footer}>
-      <Text style={styles.footerText}>Made with ❤️ by </Text>
+      <Text style={styles.footerText}>Made with <span role="img" aria-label="heart">❤️</span> by </Text>
       <Text
         style={[styles.footerText, styles.footerLink]}
         onPress={() => Linking.openURL('https://github.com/akamuraasai')}
