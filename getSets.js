@@ -142,11 +142,12 @@ const main = async () => {
   }
 
   const { userId, sessionToken } = loginResult;
-  const fbToken = await updateFBData(userId, sessionToken);
-  if (!fbToken || fbToken.length === 0) {
-    console.log('Erro ao pegar o token do facebook.');
-    return;
-  }
+  const fbToken = process.env.FB_TOKEN;
+  // const fbToken = await updateFBData(userId, sessionToken);
+  // if (!fbToken || fbToken.length === 0) {
+  //   console.log('Erro ao pegar o token do facebook.');
+  //   return;
+  // }
 
   const decks = await getUserSets(userId, sessionToken, fbToken);
   await fs.writeFileSync('src/sets.json', JSON.stringify({ decks }));
